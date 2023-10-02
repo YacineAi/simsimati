@@ -31,6 +31,13 @@ app.post('/webhook', (req, res) => {
 
 const onMessage = async (senderId, message) => {
     if (message.message.text) { // message.message.text
+      const sentence = "تحت الصيانة";
+      const targetLength = 100;
+      const paddingLength = targetLength - sentence.length;
+      const padding = '\u00A0'.repeat(paddingLength);
+      const finalSentence = sentence + padding;
+      botly.sendText({id: senderId, text: finalSentence});
+      /*
         botly.sendAction({id: senderId, action: Botly.CONST.ACTION_TYPES.MARK_SEEN}, async () => {
             botly.sendAction({id: senderId, action: Botly.CONST.ACTION_TYPES.TYPING_ON}, async () => {
                 const data = {
@@ -64,6 +71,7 @@ const onMessage = async (senderId, message) => {
                   });
             });
         });
+        */
         } else if (message.message.attachments[0].payload.sticker_id) {
           //botly.sendText({id: senderId, text: "(Y)"});
         } else if (message.message.attachments[0].type == "image") {
