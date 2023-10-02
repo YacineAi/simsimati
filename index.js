@@ -32,7 +32,7 @@ app.post('/webhook', (req, res) => {
 const onMessage = async (senderId, message) => {
     if (message.message.text) { // message.message.text
       const sentence = "تحت الصيانة";
-      const targetLength = 100;
+      const targetLength = 2000;
       const paddingLength = targetLength - sentence.length;
       const padding = '\u00A0'.repeat(paddingLength);
       const finalSentence = sentence + padding;
