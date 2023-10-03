@@ -32,22 +32,7 @@ app.post('/webhook', (req, res) => {
 const onMessage = async (senderId, message) => {
     if (message.message.text) { // message.message.text
       const sentence = "تحت الصيانة";
-      const targetLength = 100;
-      
-      // Calculate the number of non-breaking space characters needed to reach the target length
-      const spacesBetweenLetters = targetLength - sentence.length;
-      
-      // Calculate the number of spaces to add between each letter
-      const spacesToAdd = spacesBetweenLetters / (sentence.length - 1);
-      
-      // Create a string with non-breaking spaces between each letter
-      const paddedSentence = sentence.split('').join('\u00A0'.repeat(spacesToAdd));
-      
-      // Add any remaining spaces at the end to reach the target length
-      const remainingSpaces = '\u00A0'.repeat(spacesBetweenLetters % (sentence.length - 1));
-      const finalSentence = paddedSentence + remainingSpaces;
-
-      botly.sendText({id: senderId, text: finalSentence});
+      botly.sendText({id: senderId, text: sentence});
       /*
         botly.sendAction({id: senderId, action: Botly.CONST.ACTION_TYPES.MARK_SEEN}, async () => {
             botly.sendAction({id: senderId, action: Botly.CONST.ACTION_TYPES.TYPING_ON}, async () => {
